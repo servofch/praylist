@@ -735,7 +735,11 @@
                 }
 
                 // 2. ★ カレンダーの祈りを取得 (範囲対応)
-                const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD
+                // ★★★ 修正: タイムゾーン問題を修正 ★★★
+                // const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD (UTC基準)
+                const todayStr = formatDateObj(today); // YYYY-MM-DD (ローカル基準)
+                // ★★★ 修正ここまで ★★★
+
                 // ★ 変更: 今日が startDate と endDate の間にある予定を取得
                 const calendarEventsForToday = calendarPrayers.filter(p => todayStr >= p.startDate && todayStr <= p.endDate);
 
